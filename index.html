@@ -11,23 +11,26 @@
       padding: 0; 
       box-sizing: border-box; 
     }
+    
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #0F0F0F; 
+      /* Main Dark Background with Subdued Deep Purple Glow at top */
+      background: radial-gradient(circle at top, #1a152e 0%, #0F0F0F 50%);
+      background-color: #0F0F0F;
       color: #FFFFFF;
       min-height: 100vh; 
       display: flex; 
       flex-direction: column;
       align-items: center; 
-      justify-content: center; 
-      padding: 60px 20px;
+      padding: 80px 20px 40px; /* More top padding for visibility */
+      overflow-x: hidden;
     }
 
-    /* Logo and Tagline */
+    /* Logo and Tagline - Colors Matched to Screenshots */
     .logo { 
       font-size: 72px; 
       font-weight: 900; 
-      color: #6C63FF; 
+      color: #6C63FF; /* Updated to Deep Purple from first image */
       letter-spacing: -4px; 
       margin-bottom: 8px; 
     }
@@ -40,41 +43,100 @@
 
     /* Availability Badge */
     .badge {
-      background: rgba(108, 99, 255, 0.15); 
-      color: #FFFFFF;
-      border: 1px solid rgba(108, 99, 255, 0.4); 
+      background: rgba(108, 99, 255, 0.1); /* Subdued background */
+      color: #fff;
+      border: 1px solid rgba(108, 99, 255, 0.3); 
       border-radius: 20px;
       padding: 8px 18px; 
       font-size: 13px; 
       font-weight: 600;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
 
-    /* Features Grid */
+    /* Core Features Tags Container */
     .features {
       display: flex; 
       flex-wrap: wrap; 
       gap: 12px;
       justify-content: center; 
-      max-width: 600px; 
-      margin-bottom: 60px;
+      max-width: 700px; 
+      margin-bottom: 50px;
     }
+    
+    /* Individual Feature Card (Small tags) */
     .feature {
-      background: #1A1A1A; 
+      background: rgba(26, 26, 26, 0.5); /* translucent */
       border: 1px solid #2A2A2A; 
       border-radius: 12px; 
-      padding: 14px 18px;
+      padding: 12px 18px;
       font-size: 14px; 
-      color: #E0E0E0;
-      display: flex; 
-      align-items: center; 
-      gap: 10px;
+      color: #ccc;
+      backdrop-filter: blur(10px); /* Subtle blur behind tags */
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    
+    /* Interactive Lift Effect on Feature tags */
+    .feature:hover {
+      transform: translateY(-5px);
+      border-color: #6C63FF;
     }
 
-    /* Link and Button Container */
+    /* Screenshot Gallery Container */
+    .gallery {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+    
+    .gallery-title {
+      font-size: 24px;
+      color: #ccc;
+      margin-bottom: 30px;
+      font-weight: 600;
+    }
+
+    /* The Scrollable Grid for Framed Images */
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns on large screens */
+      gap: 30px;
+      width: 100%;
+      justify-items: center;
+    }
+    
+    @media (max-width: 768px) {
+      .screenshot-grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+      }
+    }
+
+    /* Framed Image Container with subtle hover zoom */
+    .screenshot-item {
+      overflow: hidden;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 320px; /* Matches actual framed image size */
+    }
+    
+    .screenshot-item img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      transition: transform 0.3s ease;
+    }
+    
+    .screenshot-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Links and Buttons Container */
     .links { 
       display: flex; 
       gap: 16px; 
@@ -83,33 +145,35 @@
       justify-content: center; 
     }
 
-    /* General Link Styling */
+    /* General Secondary Link Styling */
     .link {
       text-decoration: none;
-      padding: 12px 24px; 
+      padding: 14px 28px; 
       font-size: 14px; 
-      color: #6C63FF; 
-      border: 1px solid rgba(108, 99, 255, 0.3); 
-      border-radius: 10px; 
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
+      color: #6C63FF; /* Deep Purple text matched */
+      border: 1px solid rgba(108, 99, 255, 0.3); /* Subdued border */
+      border-radius: 12px; 
+      transition: all 0.3s ease;
+      font-weight: 500;
     }
     .link:hover { 
-      background: rgba(108, 99, 255, 0.1); 
+      background: rgba(108, 99, 255, 0.2); 
       border-color: rgba(108, 99, 255, 0.6);
+      transform: translateY(-2px);
     }
 
-    /* FIXED: Primary CTA Button (High Visibility) */
+    /* FIX: Primary CTA Button (Points to APK download) */
     .link-primary {
-      background: #6C63FF; 
-      color: #FFFFFF !important; /* Forced White Text for visibility */
+      background: #6C63FF; /* Solid Deep Purple */
+      color: #FFFFFF !important; /* Forces bold white text */
       font-weight: 700;
-      border: 1px solid #6C63FF;
+      border-color: #6C63FF;
+      box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
     }
     .link-primary:hover {
       background: #5a52d4;
       border-color: #FFFFFF;
+      box-shadow: 0 15px 30px rgba(108, 99, 255, 0.4);
     }
 
     /* Footer and Contact Styling */
@@ -124,29 +188,57 @@
       color: #6C63FF;
       text-decoration: none;
     }
+    .footer a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
   <div class="logo">Savr</div>
+
   <p class="tagline">Spend smart, save more</p>
 
-  <div class="badge">📱 Available on Android</div>
+  <div class="badge">📱 Secure • Offline First • INR Supported</div>
 
   <div class="features">
     <div class="feature">💰 Track Expenses</div>
     <div class="feature">📊 Smart Reports</div>
     <div class="feature">🎯 Set Budgets</div>
-    <div class="feature">🔄 Recurring Expenses</div>
+    <div class="feature">🔄 Recurring</div>
     <div class="feature">📤 CSV Export</div>
     <div class="feature">☁️ Cloud Sync</div>
-    <div class="feature">📵 Works Offline</div>
-    <div class="feature">🌍 30 Currencies</div>
+    <div class="feature">📵 Offline</div>
+    <div class="feature">🌍 30+ Currencies</div>
+  </div>
+
+  <div class="gallery">
+    <h2 class="gallery-title">Feature Showcase</h2>
+    <div class="screenshot-grid">
+      <div class="screenshot-item">
+        <img src="https://007wary.github.io/expense-tracker/assets/savr_screenshot_0.png" alt="Home Screen overview">
+      </div>
+      <div class="screenshot-item">
+        <img src="https://007wary.github.io/expense-tracker/assets/savr_screenshot_1.png" alt="Add Expense flow">
+      </div>
+      <div class="screenshot-item">
+        <img src="https://007wary.github.io/expense-tracker/assets/savr_screenshot_2.png" alt="Transaction history">
+      </div>
+      <div class="screenshot-item">
+        <img src="https://007wary.github.io/expense-tracker/assets/savr_screenshot_3.png" alt="Set limits per category">
+      </div>
+      <div class="screenshot-item">
+        <img src="https://007wary.github.io/expense-tracker/assets/savr_screenshot_4.png" alt="Insights and spending forecasts">
+      </div>
+      <div class="screenshot-item">
+        <img src="https://007wary.github.io/expense-tracker/assets/savr_screenshot_5.png" alt="Multicurrency selection">
+      </div>
+    </div>
   </div>
 
   <div class="links">
     <a class="link link-primary" href="https://007wary.github.io/expense-tracker/">
-      View Main Project (Expense Tracker)
+      Download APK (Beta)
     </a>
     
     <a class="link" href="privacy-policy.html">Privacy Policy</a>
@@ -158,7 +250,7 @@
   </div>
 
   <div class="footer">
-    <p>© <span id="year">2026</span> Savr · Developed by Mwnswrang Wary</p>
+    <p>© <span id="year">2026</span> Savr · Developed by Wary Dev.</p>
     <p>Contact: <a href="mailto:007mwnswrangwary@gmail.com">007mwnswrangwary@gmail.com</a></p>
   </div>
 
