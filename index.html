@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Savr — Expense Tracker</title>
+  <title>Savr — Spend Smart, Save More</title>
   <style>
     /* Reset and Core Layout */
     * { 
@@ -13,7 +13,7 @@
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background-color: #0F0F0F; /* Main Dark Background from app.json */
+      background-color: #0F0F0F; 
       color: #FFFFFF;
       min-height: 100vh; 
       display: flex; 
@@ -27,7 +27,7 @@
     .logo { 
       font-size: 72px; 
       font-weight: 900; 
-      color: #A365FF; /* Updated Purple accent from brand icon */
+      color: #6C63FF; 
       letter-spacing: -4px; 
       margin-bottom: 8px; 
     }
@@ -40,9 +40,9 @@
 
     /* Availability Badge */
     .badge {
-      background: rgba(163, 101, 255, 0.15); /* Translucent version of accent color */
+      background: rgba(108, 99, 255, 0.15); 
       color: #FFFFFF;
-      border: 1px solid rgba(163, 101, 255, 0.4); 
+      border: 1px solid rgba(108, 99, 255, 0.4); 
       border-radius: 20px;
       padding: 8px 18px; 
       font-size: 13px; 
@@ -63,8 +63,8 @@
       margin-bottom: 60px;
     }
     .feature {
-      background: #1A1A1A; /* Slightly lighter background */
-      border: 1px solid #2A2A2A; /* Dark border */
+      background: #1A1A1A; 
+      border: 1px solid #2A2A2A; 
       border-radius: 12px; 
       padding: 14px 18px;
       font-size: 14px; 
@@ -83,30 +83,33 @@
       justify-content: center; 
     }
 
-    /* Main Action Button (Project Link) */
-    .link-primary {
-      background: #A365FF; /* Solid accent color for primary action */
-      color: #0F0F0F;
-      font-weight: 600;
-    }
-    .link-primary:hover {
-      background: #FFFFFF;
-      border-color: #FFFFFF;
-    }
-
-    /* General and Secondary Link Styling */
+    /* General Link Styling */
     .link {
       text-decoration: none;
       padding: 12px 24px; 
       font-size: 14px; 
-      color: #A365FF;
-      border: 1px solid rgba(163, 101, 255, 0.3);
+      color: #6C63FF; 
+      border: 1px solid rgba(108, 99, 255, 0.3); 
       border-radius: 10px; 
       transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
     }
     .link:hover { 
-      background: rgba(163, 101, 255, 0.1); 
-      border-color: rgba(163, 101, 255, 0.6);
+      background: rgba(108, 99, 255, 0.1); 
+      border-color: rgba(108, 99, 255, 0.6);
+    }
+
+    /* FIXED: Primary CTA Button (High Visibility) */
+    .link-primary {
+      background: #6C63FF; 
+      color: #FFFFFF !important; /* Forced White Text for visibility */
+      font-weight: 700;
+      border: 1px solid #6C63FF;
+    }
+    .link-primary:hover {
+      background: #5a52d4;
+      border-color: #FFFFFF;
     }
 
     /* Footer and Contact Styling */
@@ -118,18 +121,14 @@
       margin-top: auto; 
     }
     .footer a {
-      color: #A365FF;
+      color: #6C63FF;
       text-decoration: none;
-    }
-    .footer a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
   <div class="logo">Savr</div>
-
   <p class="tagline">Spend smart, save more</p>
 
   <div class="badge">📱 Available on Android</div>
@@ -152,15 +151,19 @@
     
     <a class="link" href="privacy-policy.html">Privacy Policy</a>
     <a class="link" href="terms-of-service.html">Terms of Service</a>
+
+    <a class="link" href="https://007wary.github.io/expense-tracker/delete-account.html">
+      Request Account Deletion
+    </a>
   </div>
 
   <div class="footer">
-    <p>© <span id="year">2026</span> Savr · Developed by Wary Dev.</p>
+    <p>© <span id="year">2026</span> Savr · Developed by Mwnswrang Wary</p>
     <p>Contact: <a href="mailto:007mwnswrangwary@gmail.com">007mwnswrangwary@gmail.com</a></p>
   </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear() > 2026 ? new Date().getFullYear() : '2026';
+    document.getElementById('year').textContent = new Date().getFullYear() >= 2026 ? new Date().getFullYear() : '2026';
   </script>
 
 </body>
