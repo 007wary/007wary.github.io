@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Savr — Expense Tracker</title>
+  <style>
+    /* Reset and Core Layout */
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #0F0F0F; /* Main Dark Background from app.json */
+      color: #FFFFFF;
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column;
+      align-items: center; 
+      justify-content: center; 
+      padding: 60px 20px;
+    }
+
+    /* Logo and Tagline */
+    .logo { 
+      font-size: 72px; 
+      font-weight: 900; 
+      color: #A365FF; /* Updated Purple accent from brand icon */
+      letter-spacing: -4px; 
+      margin-bottom: 8px; 
+    }
+    .tagline { 
+      color: #999; 
+      font-size: 18px; 
+      margin-bottom: 24px; 
+      font-weight: 400;
+    }
+
+    /* Availability Badge */
+    .badge {
+      background: rgba(163, 101, 255, 0.15); /* Translucent version of accent color */
+      color: #FFFFFF;
+      border: 1px solid rgba(163, 101, 255, 0.4); 
+      border-radius: 20px;
+      padding: 8px 18px; 
+      font-size: 13px; 
+      font-weight: 600;
+      margin-bottom: 48px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Features Grid */
+    .features {
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 12px;
+      justify-content: center; 
+      max-width: 600px; 
+      margin-bottom: 60px;
+    }
+    .feature {
+      background: #1A1A1A; /* Slightly lighter background */
+      border: 1px solid #2A2A2A; /* Dark border */
+      border-radius: 12px; 
+      padding: 14px 18px;
+      font-size: 14px; 
+      color: #E0E0E0;
+      display: flex; 
+      align-items: center; 
+      gap: 10px;
+    }
+
+    /* Link and Button Container */
+    .links { 
+      display: flex; 
+      gap: 16px; 
+      margin-bottom: 60px; 
+      flex-wrap: wrap; 
+      justify-content: center; 
+    }
+
+    /* Main Action Button (Project Link) */
+    .link-primary {
+      background: #A365FF; /* Solid accent color for primary action */
+      color: #0F0F0F;
+      font-weight: 600;
+    }
+    .link-primary:hover {
+      background: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+
+    /* General and Secondary Link Styling */
+    .link {
+      text-decoration: none;
+      padding: 12px 24px; 
+      font-size: 14px; 
+      color: #A365FF;
+      border: 1px solid rgba(163, 101, 255, 0.3);
+      border-radius: 10px; 
+      transition: all 0.2s ease;
+    }
+    .link:hover { 
+      background: rgba(163, 101, 255, 0.1); 
+      border-color: rgba(163, 101, 255, 0.6);
+    }
+
+    /* Footer and Contact Styling */
+    .footer { 
+      color: #555; 
+      font-size: 13px; 
+      text-align: center; 
+      line-height: 2.2; 
+      margin-top: auto; 
+    }
+    .footer a {
+      color: #A365FF;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">Savr</div>
+
+  <p class="tagline">Spend smart, save more</p>
+
+  <div class="badge">📱 Available on Android</div>
+
+  <div class="features">
+    <div class="feature">💰 Track Expenses</div>
+    <div class="feature">📊 Smart Reports</div>
+    <div class="feature">🎯 Set Budgets</div>
+    <div class="feature">🔄 Recurring Expenses</div>
+    <div class="feature">📤 CSV Export</div>
+    <div class="feature">☁️ Cloud Sync</div>
+    <div class="feature">📵 Works Offline</div>
+    <div class="feature">🌍 30 Currencies</div>
+  </div>
+
+  <div class="links">
+    <a class="link link-primary" href="https://007wary.github.io/expense-tracker/">
+      View Main Project (Expense Tracker)
+    </a>
+    
+    <a class="link" href="privacy-policy.html">Privacy Policy</a>
+    <a class="link" href="terms-of-service.html">Terms of Service</a>
+  </div>
+
+  <div class="footer">
+    <p>© <span id="year">2026</span> Savr · Developed by Wary Dev.</p>
+    <p>Contact: <a href="mailto:007mwnswrangwary@gmail.com">007mwnswrangwary@gmail.com</a></p>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear() > 2026 ? new Date().getFullYear() : '2026';
+  </script>
+
+</body>
+</html>
