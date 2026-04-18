@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Savr — Spend Smart, Save More</title>
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -17,6 +19,15 @@
       align-items: center;
       padding: 60px 20px;
       overflow-x: hidden;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 60px;
+      position: relative;
     }
 
     .logo {
@@ -43,9 +54,24 @@
       padding: 10px 20px;
       font-size: 14px;
       font-weight: 600;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
     }
 
+    /* ─── SVG ILLUSTRATION ─── */
+    .illustration {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 1s ease forwards 0.3s;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── FEATURES ─── */
     .features {
       display: flex;
       flex-wrap: wrap;
@@ -59,19 +85,24 @@
       background: rgba(26, 26, 26, 0.6);
       border: 1px solid #2A2A2A;
       border-radius: 12px;
-      padding: 14px 20px;
-      font-size: 15px;
+      padding: 12px 18px;
+      font-size: 14px;
       color: #ccc;
-      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
       transition: all 0.3s ease;
     }
 
+    .feature ion-icon { color: #6C63FF; font-size: 16px; }
+
     .feature:hover {
-      transform: translateY(-5px);
+      transform: translateY(-4px);
       border-color: #6C63FF;
       background: rgba(108, 99, 255, 0.05);
     }
 
+    /* ─── LINKS ─── */
     .links {
       display: flex;
       gap: 16px;
@@ -109,7 +140,16 @@
       box-shadow: 0 15px 35px rgba(108, 99, 255, 0.5);
     }
 
-    /* ─── SECTION TITLE ─── */
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%;
+      max-width: 720px;
+      height: 1px;
+      background: #2A2A2A;
+      margin: 0 0 60px;
+    }
+
+    /* ─── SECTION TITLES ─── */
     .section-title {
       font-size: 28px;
       font-weight: 800;
@@ -124,6 +164,147 @@
       color: #666;
       text-align: center;
       margin-bottom: 32px;
+    }
+
+    /* ─── BLOG ─── */
+    .blog-container {
+      width: 100%;
+      max-width: 720px;
+      margin-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .blog-card {
+      background: rgba(26, 26, 26, 0.6);
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      padding: 24px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .blog-card:hover {
+      border-color: rgba(108, 99, 255, 0.4);
+      transform: translateY(-3px);
+      background: rgba(108, 99, 255, 0.05);
+    }
+
+    .blog-icon-box {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(108, 99, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .blog-icon-box ion-icon {
+      font-size: 24px;
+      color: #6C63FF;
+    }
+
+    .blog-content { flex: 1; }
+
+    .blog-meta {
+      font-size: 11px;
+      color: #555;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .blog-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .blog-excerpt {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .blog-arrow { color: #555; flex-shrink: 0; }
+    .blog-arrow ion-icon { font-size: 20px; }
+
+    .blog-view-all {
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .blog-view-all a {
+      color: #6C63FF;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .blog-view-all a:hover { text-decoration: underline; }
+
+    /* ─── HELP ─── */
+    .help-container {
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .help-card {
+      background: rgba(26, 26, 26, 0.6);
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .help-card:hover {
+      border-color: rgba(108, 99, 255, 0.4);
+      transform: translateY(-4px);
+      background: rgba(108, 99, 255, 0.05);
+    }
+
+    .help-icon-box {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(108, 99, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .help-icon-box ion-icon {
+      font-size: 22px;
+      color: #6C63FF;
+    }
+
+    .help-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .help-desc {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.6;
     }
 
     /* ─── FAQ ─── */
@@ -142,9 +323,7 @@
       transition: border-color 0.3s ease;
     }
 
-    .faq-item.open {
-      border-color: rgba(108, 99, 255, 0.4);
-    }
+    .faq-item.open { border-color: rgba(108, 99, 255, 0.4); }
 
     .faq-question {
       width: 100%;
@@ -166,10 +345,10 @@
     .faq-question:hover { color: #6C63FF; }
 
     .faq-icon {
-      font-size: 20px;
       color: #6C63FF;
       transition: transform 0.3s ease;
       flex-shrink: 0;
+      font-size: 20px;
     }
 
     .faq-item.open .faq-icon { transform: rotate(45deg); }
@@ -189,51 +368,6 @@
       padding: 0 24px 20px;
     }
 
-    /* ─── HELP CARDS ─── */
-    .help-container {
-      width: 100%;
-      max-width: 720px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      margin-bottom: 80px;
-    }
-
-    .help-card {
-      background: rgba(26, 26, 26, 0.6);
-      border: 1px solid #2A2A2A;
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-
-    .help-card:hover {
-      border-color: rgba(108, 99, 255, 0.4);
-      transform: translateY(-4px);
-      background: rgba(108, 99, 255, 0.05);
-    }
-
-    .help-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .help-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-
-    .help-desc {
-      font-size: 13px;
-      color: #666;
-      line-height: 1.6;
-    }
-
     /* ─── FOOTER ─── */
     .footer {
       color: #555;
@@ -246,38 +380,148 @@
     .footer a { color: #6C63FF; text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
 
-    .divider {
-      width: 100%;
-      max-width: 720px;
-      height: 1px;
-      background: #2A2A2A;
-      margin: 20px 0 60px;
+    @media (max-width: 480px) {
+      .logo { font-size: 60px; }
+      .section-title { font-size: 22px; }
+      .help-container { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <div class="logo">Savr</div>
-  <p class="tagline">Spend smart, save more</p>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="logo">Savr</div>
+    <p class="tagline">Spend smart, save more</p>
+    <div class="badge">📱 Available on Android · Google Play</div>
 
-  <div class="badge">📱 Available on Android · Google Play</div>
+    <!-- SVG LINE ART ILLUSTRATION -->
+    <svg class="illustration" viewBox="0 0 500 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Phone outline -->
+      <rect x="160" y="20" width="180" height="240" rx="24" stroke="#6C63FF" stroke-width="2" fill="none" opacity="0.6"/>
+      <rect x="170" y="35" width="160" height="210" rx="16" stroke="#6C63FF" stroke-width="1" fill="none" opacity="0.3"/>
+      <!-- Status bar dots -->
+      <circle cx="225" cy="28" r="3" fill="#6C63FF" opacity="0.4"/>
+      <circle cx="240" cy="28" r="3" fill="#6C63FF" opacity="0.4"/>
+      <rect x="248" y="25" width="20" height="6" rx="3" fill="#6C63FF" opacity="0.4"/>
+      <!-- Home indicator -->
+      <rect x="220" y="248" width="60" height="3" rx="2" fill="#6C63FF" opacity="0.4"/>
 
-  <div class="features">
-    <div class="feature">💰 Track Expenses</div>
-    <div class="feature">📊 Smart Reports</div>
-    <div class="feature">🎯 Set Budgets</div>
-    <div class="feature">🔄 Recurring</div>
-    <div class="feature">📤 CSV Export</div>
-    <div class="feature">☁️ Drive Backup</div>
-    <div class="feature">📵 Offline</div>
-    <div class="feature">🌍 30+ Currencies</div>
+      <!-- Dashboard card -->
+      <rect x="182" y="50" width="136" height="55" rx="10" stroke="#6C63FF" stroke-width="1.5" fill="rgba(108,99,255,0.08)"/>
+      <text x="250" y="70" font-family="system-ui" font-size="9" fill="#888" text-anchor="middle">TOTAL SPENT</text>
+      <text x="250" y="88" font-family="system-ui" font-size="16" font-weight="700" fill="#6C63FF" text-anchor="middle">₹24,500</text>
+      <text x="250" y="100" font-family="system-ui" font-size="8" fill="#555" text-anchor="middle">18 transactions</text>
+
+      <!-- Category bars -->
+      <rect x="182" y="118" width="136" height="8" rx="4" fill="#2A2A2A"/>
+      <rect x="182" y="118" width="95" height="8" rx="4" fill="#FF6B6B" opacity="0.8"/>
+      <text x="182" y="114" font-family="system-ui" font-size="8" fill="#888">Food</text>
+      <text x="318" y="114" font-family="system-ui" font-size="8" fill="#FF6B6B" text-anchor="end">70%</text>
+
+      <rect x="182" y="134" width="136" height="8" rx="4" fill="#2A2A2A"/>
+      <rect x="182" y="134" width="60" height="8" rx="4" fill="#4ECDC4" opacity="0.8"/>
+      <text x="182" y="130" font-family="system-ui" font-size="8" fill="#888">Transport</text>
+      <text x="318" y="130" font-family="system-ui" font-size="8" fill="#4ECDC4" text-anchor="end">44%</text>
+
+      <rect x="182" y="150" width="136" height="8" rx="4" fill="#2A2A2A"/>
+      <rect x="182" y="150" width="40" height="8" rx="4" fill="#FFB800" opacity="0.8"/>
+      <text x="182" y="146" font-family="system-ui" font-size="8" fill="#888">Shopping</text>
+      <text x="318" y="146" font-family="system-ui" font-size="8" fill="#FFB800" text-anchor="end">29%</text>
+
+      <!-- Mini chart bars -->
+      <rect x="190" y="200" width="14" height="30" rx="4" fill="#6C63FF" opacity="0.3"/>
+      <rect x="210" y="190" width="14" height="40" rx="4" fill="#6C63FF" opacity="0.5"/>
+      <rect x="230" y="195" width="14" height="35" rx="4" fill="#6C63FF" opacity="0.4"/>
+      <rect x="250" y="185" width="14" height="45" rx="4" fill="#6C63FF" opacity="0.7"/>
+      <rect x="270" y="192" width="14" height="38" rx="4" fill="#6C63FF" opacity="0.5"/>
+      <rect x="290" y="188" width="14" height="42" rx="4" fill="#6C63FF" opacity="0.9"/>
+
+      <!-- Floating cards left -->
+      <rect x="20" y="60" width="120" height="50" rx="10" stroke="#2A2A2A" stroke-width="1.5" fill="rgba(26,26,26,0.8)"/>
+      <circle cx="40" cy="85" r="10" stroke="#00D9A5" stroke-width="1.5" fill="none"/>
+      <text x="57" y="81" font-family="system-ui" font-size="9" fill="#888">Savings Goal</text>
+      <text x="57" y="94" font-family="system-ui" font-size="11" font-weight="700" fill="#00D9A5">72%</text>
+      <line x1="20" y1="60" x2="160" y2="60" stroke="#2A2A2A" stroke-width="0.5"/>
+
+      <!-- Floating cards right -->
+      <rect x="360" y="60" width="120" height="50" rx="10" stroke="#2A2A2A" stroke-width="1.5" fill="rgba(26,26,26,0.8)"/>
+      <circle cx="380" cy="85" r="10" stroke="#FF5C5C" stroke-width="1.5" fill="none"/>
+      <text x="397" y="81" font-family="system-ui" font-size="9" fill="#888">Budget Alert</text>
+      <text x="397" y="94" font-family="system-ui" font-size="11" font-weight="700" fill="#FF5C5C">85% used</text>
+
+      <!-- Connector lines -->
+      <line x1="140" y1="85" x2="160" y2="85" stroke="#2A2A2A" stroke-width="1" stroke-dasharray="4,3"/>
+      <line x1="340" y1="85" x2="360" y2="85" stroke="#2A2A2A" stroke-width="1" stroke-dasharray="4,3"/>
+
+      <!-- Bottom floating pill -->
+      <rect x="165" y="265" width="170" height="22" rx="11" stroke="#6C63FF" stroke-width="1" fill="rgba(108,99,255,0.08)"/>
+      <text x="250" y="280" font-family="system-ui" font-size="9" fill="#6C63FF" text-anchor="middle" font-weight="600">☁️ Backed up to Google Drive</text>
+    </svg>
+
+    <div class="features">
+      <div class="feature"><ion-icon name="restaurant-outline"></ion-icon> Track Expenses</div>
+      <div class="feature"><ion-icon name="bar-chart-outline"></ion-icon> Smart Reports</div>
+      <div class="feature"><ion-icon name="wallet-outline"></ion-icon> Set Budgets</div>
+      <div class="feature"><ion-icon name="repeat-outline"></ion-icon> Recurring</div>
+      <div class="feature"><ion-icon name="share-outline"></ion-icon> CSV Export</div>
+      <div class="feature"><ion-icon name="cloud-outline"></ion-icon> Drive Backup</div>
+      <div class="feature"><ion-icon name="wifi-outline"></ion-icon> Offline</div>
+      <div class="feature"><ion-icon name="globe-outline"></ion-icon> 30+ Currencies</div>
+    </div>
+
+    <div class="links">
+      <a class="link link-primary" href="https://play.google.com/store/apps/details?id=com.saver.savr" target="_blank">Download on Google Play</a>
+      <a class="link" href="/privacy-policy.html">Privacy Policy</a>
+      <a class="link" href="/terms-of-service.html">Terms of Service</a>
+      <a class="link" href="/delete-account.html">Delete Account</a>
+    </div>
   </div>
 
-  <div class="links">
-    <a class="link link-primary" href="https://play.google.com/store/apps/details?id=com.saver.savr" target="_blank">Download on Google Play</a>
-    <a class="link" href="/privacy-policy.html">Privacy Policy</a>
-    <a class="link" href="/terms-of-service.html">Terms of Service</a>
-    <a class="link" href="/delete-account.html">Delete Account</a>
+  <div class="divider"></div>
+
+  <!-- BLOG SECTION -->
+  <p class="section-title">Blog</p>
+  <p class="section-sub">Updates, tips and stories from the Savr team</p>
+
+  <div class="blog-container">
+
+    <a class="blog-card" href="/blog/posts/why-i-built-savr.html">
+      <div class="blog-icon-box">
+        <ion-icon name="bulb-outline"></ion-icon>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">Apr 18, 2026 · Story</div>
+        <div class="blog-title">Why I Built Savr — A Developer's Story</div>
+        <div class="blog-excerpt">How a simple frustration with existing expense trackers turned into a full Android app on the Play Store.</div>
+      </div>
+      <div class="blog-arrow"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+    </a>
+
+    <a class="blog-card" href="/blog/posts/how-savr-protects-your-data.html">
+      <div class="blog-icon-box">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">Apr 18, 2026 · Privacy</div>
+        <div class="blog-title">How Savr Protects Your Financial Data</div>
+        <div class="blog-excerpt">A deep dive into our privacy-first architecture — why your expenses never touch our servers.</div>
+      </div>
+      <div class="blog-arrow"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+    </a>
+
+    <a class="blog-card" href="/blog/posts/5-tips-to-save-more.html">
+      <div class="blog-icon-box">
+        <ion-icon name="cash-outline"></ion-icon>
+      </div>
+      <div class="blog-content">
+        <div class="blog-meta">Apr 18, 2026 · Tips</div>
+        <div class="blog-title">5 Simple Tips to Save More Money Every Month</div>
+        <div class="blog-excerpt">Practical, India-specific money saving tips that actually work — no complicated finance jargon.</div>
+      </div>
+      <div class="blog-arrow"><ion-icon name="chevron-forward-outline"></ion-icon></div>
+    </a>
+
   </div>
 
   <div class="divider"></div>
@@ -288,22 +532,30 @@
 
   <div class="help-container">
     <a class="help-card" href="mailto:007mwnswrangwary@gmail.com">
-      <span class="help-icon">✉️</span>
+      <div class="help-icon-box">
+        <ion-icon name="mail-outline"></ion-icon>
+      </div>
       <div class="help-title">Email Support</div>
       <div class="help-desc">Contact us directly for any issues or questions</div>
     </a>
     <a class="help-card" href="/delete-account.html">
-      <span class="help-icon">🗑️</span>
+      <div class="help-icon-box">
+        <ion-icon name="person-remove-outline"></ion-icon>
+      </div>
       <div class="help-title">Delete Account</div>
       <div class="help-desc">Request complete deletion of your account and data</div>
     </a>
     <a class="help-card" href="/privacy-policy.html">
-      <span class="help-icon">🔒</span>
+      <div class="help-icon-box">
+        <ion-icon name="shield-checkmark-outline"></ion-icon>
+      </div>
       <div class="help-title">Privacy Policy</div>
       <div class="help-desc">Learn how we handle and protect your data</div>
     </a>
     <a class="help-card" href="/terms-of-service.html">
-      <span class="help-icon">📄</span>
+      <div class="help-icon-box">
+        <ion-icon name="document-text-outline"></ion-icon>
+      </div>
       <div class="help-title">Terms of Service</div>
       <div class="help-desc">Read our terms and conditions of use</div>
     </a>
@@ -316,87 +568,62 @@
   <p class="section-sub">Quick answers to common questions</p>
 
   <div class="faq-container">
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         Is Savr free to use?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
       <div class="faq-answer">Yes! Savr is completely free to download and use. The app is supported by ads to keep it free for everyone.</div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         Where is my data stored?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
-      <div class="faq-answer">All your financial data (expenses, budgets, goals) is stored locally on your device using SQLite. It never touches our servers. Backups are stored in your own Google Drive account — only you can access them.</div>
+      <div class="faq-answer">All your financial data is stored locally on your device using SQLite. It never touches our servers. Backups are stored in your own Google Drive account — only you can access them.</div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         Does Savr work offline?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
-      <div class="faq-answer">Yes! Savr works completely offline. You can add, edit and delete expenses, view reports and budgets — all without an internet connection. Internet is only needed for Google Sign In and Google Drive backup.</div>
+      <div class="faq-answer">Yes! Savr works completely offline. You can add, edit and delete expenses, view reports and budgets without an internet connection. Internet is only needed for Google Sign In and Google Drive backup.</div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         How does Google Drive backup work?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
-      <div class="faq-answer">Savr automatically backs up your data to a private Savr folder in your Google Drive. The backup is only accessible by you and the Savr app. If you reinstall the app or switch devices, Savr will detect the backup and offer to restore your data.</div>
+      <div class="faq-answer">Savr automatically backs up your data to a private Savr folder in your Google Drive. If you reinstall the app or switch devices, Savr will detect the backup and offer to restore your data.</div>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Can I use Savr on multiple devices?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">Yes! Sign in with the same Google account on your new device and restore your data from the Google Drive backup. Your complete expense history will be restored.</div>
-    </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         How do I export my data?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
-      <div class="faq-answer">Go to History tab → tap the Export button in the top right corner. Your expenses will be exported as a CSV file that you can open in Excel, Google Sheets or any spreadsheet app.</div>
+      <div class="faq-answer">Go to History tab → tap the Export button in the top right corner. Your expenses will be exported as a CSV file that you can open in Excel or Google Sheets.</div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         How do I delete my account?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
-      <div class="faq-answer">You can request account deletion by visiting our Delete Account page or emailing us at 007mwnswrangwary@gmail.com. We will process your request within 30 days and remove all your data from our servers.</div>
+      <div class="faq-answer">Visit our Delete Account page or email us at 007mwnswrangwary@gmail.com. We will process your request within 30 days and remove all your data from our servers.</div>
     </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         Which currencies does Savr support?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
       <div class="faq-answer">Savr supports 30+ currencies including INR, USD, EUR, GBP, JPY, AED, SGD and many more. You can change your currency anytime from Settings → Currency.</div>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Is my financial data shared with anyone?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">No. Your financial data is stored only on your device and in your personal Google Drive. We never have access to your expenses, budgets or any financial information. We only store basic profile info (name, email) for account management.</div>
-    </div>
-
     <div class="faq-item">
       <button class="faq-question" onclick="toggleFaq(this)">
         I found a bug. How do I report it?
-        <span class="faq-icon">+</span>
+        <ion-icon class="faq-icon" name="add-outline"></ion-icon>
       </button>
       <div class="faq-answer">Please email us at 007mwnswrangwary@gmail.com with a description of the bug and your device model. We'll look into it as soon as possible!</div>
     </div>
-
   </div>
 
   <div class="footer">
@@ -406,14 +633,11 @@
   </div>
 
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear() >= 2026 ? new Date().getFullYear() : '2026';
-
+    document.getElementById('year').textContent = new Date().getFullYear() >= 2026 ? new Date().getFullYear() : '2026'
     function toggleFaq(btn) {
       const item = btn.closest('.faq-item')
       const isOpen = item.classList.contains('open')
-      // Close all open items
       document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'))
-      // Open clicked item if it was closed
       if (!isOpen) item.classList.add('open')
     }
   </script>
