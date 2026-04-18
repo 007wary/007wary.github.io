@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Savr Protects Your Data — Savr Blog</title>
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: radial-gradient(circle at top, #1a152e 0%, #0F0F0F 60%);
+      color: #FFFFFF;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container { max-width: 680px; margin: 0 auto; }
+    .back { display: inline-flex; align-items: center; gap: 6px; color: #6C63FF; text-decoration: none; font-size: 14px; font-weight: 600; margin-bottom: 40px; }
+    .back:hover { opacity: 0.8; }
+    .meta { font-size: 12px; color: #555; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    h1 { font-size: 36px; font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1.2; margin-bottom: 24px; }
+    .author { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #2A2A2A; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(108, 99, 255, 0.2); border: 1px solid rgba(108, 99, 255, 0.4); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #6C63FF; }
+    .author-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .author-role { font-size: 12px; color: #555; }
+    .content { line-height: 1.9; color: #bbb; font-size: 16px; }
+    .content p { margin-bottom: 24px; }
+    .content h2 { font-size: 22px; font-weight: 700; color: #fff; margin: 40px 0 16px; }
+    .content strong { color: #fff; }
+    .highlight { background: rgba(108, 99, 255, 0.08); border-left: 3px solid #6C63FF; padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 24px 0; color: #aaa; font-style: italic; }
+    .arch-box { background: rgba(26,26,26,0.6); border: 1px solid #2A2A2A; border-radius: 14px; padding: 24px; margin: 24px 0; }
+    .arch-row { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .arch-row:last-child { margin-bottom: 0; }
+    .arch-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(108,99,255,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .arch-icon ion-icon { color: #6C63FF; font-size: 18px; }
+    .arch-label { font-size: 14px; color: #fff; font-weight: 600; }
+    .arch-desc { font-size: 12px; color: #555; margin-top: 2px; }
+    .footer-nav { margin-top: 60px; padding-top: 32px; border-top: 1px solid #2A2A2A; display: flex; justify-content: space-between; align-items: center; }
+    .footer-nav a { color: #6C63FF; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .footer-nav a:hover { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="/"><ion-icon name="arrow-back-outline"></ion-icon> Back to Savr</a>
+
+    <div class="meta">Apr 18, 2026 · Privacy · 3 min read</div>
+    <h1>How Savr Protects Your Financial Data</h1>
+
+    <div class="author">
+      <div class="author-avatar">MW</div>
+      <div>
+        <div class="author-name">Mwnswrang Wary</div>
+        <div class="author-role">Developer · Wary Dev.</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>Financial data is among the most sensitive information on your phone. Here's exactly how Savr handles it — with complete transparency.</p>
+
+      <h2>The Architecture</h2>
+      <p>Savr uses a privacy-first, local-first architecture. Here's where each type of data lives:</p>
+
+      <div class="arch-box">
+        <div class="arch-row">
+          <div class="arch-icon"><ion-icon name="phone-portrait-outline"></ion-icon></div>
+          <div>
+            <div class="arch-label">Your Device (SQLite)</div>
+            <div class="arch-desc">All expenses, budgets, goals and recurring expenses — never leaves your device</div>
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-icon"><ion-icon name="logo-google"></ion-icon></div>
+          <div>
+            <div class="arch-label">Your Google Drive</div>
+            <div class="arch-desc">Automatic backup stored in your personal Drive — only you can access it</div>
+          </div>
+        </div>
+        <div class="arch-row">
+          <div class="arch-icon"><ion-icon name="server-outline"></ion-icon></div>
+          <div>
+            <div class="arch-label">Our Servers (Supabase)</div>
+            <div class="arch-desc">Only your name, email and app version — zero financial data</div>
+          </div>
+        </div>
+      </div>
+
+      <h2>What We Cannot See</h2>
+      <p>We have <strong>zero access</strong> to your expenses, budgets, spending goals or any financial information. This is not just a policy — it's architecture. The data is physically stored on your device and in your own Google Drive.</p>
+
+      <div class="highlight">"We designed Savr so that even if we wanted to see your expenses, we technically couldn't."</div>
+
+      <h2>Google Drive Scope</h2>
+      <p>Savr uses the <strong>drive.file</strong> scope — the most restricted Google Drive permission available. This means Savr can only see and access files that it creates itself. It cannot read any other files in your Google Drive.</p>
+
+      <h2>Ads and Your Data</h2>
+      <p>Savr displays ads via Google AdMob to stay free. AdMob may use your device identifier for ad personalization, but <strong>your financial data is never shared with advertisers</strong>. You can opt out of personalized ads in your device settings.</p>
+
+      <h2>Our Commitment</h2>
+      <p>Savr will never sell your data, share your financial information, or use your expenses for any purpose other than showing them to you. That's the whole point of building local-first.</p>
+    </div>
+
+    <div class="footer-nav">
+      <a href="/blog/posts/why-i-built-savr.html"><ion-icon name="arrow-back-outline"></ion-icon> Previous</a>
+      <a href="/blog/posts/5-tips-to-save-more.html">Next Post <ion-icon name="arrow-forward-outline"></ion-icon></a>
+    </div>
+  </div>
+</body>
+</html>

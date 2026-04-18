@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why I Built Savr — Savr Blog</title>
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: radial-gradient(circle at top, #1a152e 0%, #0F0F0F 60%);
+      color: #FFFFFF;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container { max-width: 680px; margin: 0 auto; }
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #6C63FF;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+    .back:hover { opacity: 0.8; }
+    .meta {
+      font-size: 12px;
+      color: #555;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #2A2A2A;
+    }
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(108, 99, 255, 0.2);
+      border: 1px solid rgba(108, 99, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #6C63FF;
+    }
+    .author-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .author-role { font-size: 12px; color: #555; }
+    .content { line-height: 1.9; color: #bbb; font-size: 16px; }
+    .content p { margin-bottom: 24px; }
+    .content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin: 40px 0 16px;
+      letter-spacing: -0.3px;
+    }
+    .content strong { color: #fff; }
+    .highlight {
+      background: rgba(108, 99, 255, 0.08);
+      border-left: 3px solid #6C63FF;
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      margin: 24px 0;
+      color: #aaa;
+      font-style: italic;
+    }
+    .footer-nav {
+      margin-top: 60px;
+      padding-top: 32px;
+      border-top: 1px solid #2A2A2A;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-nav a {
+      color: #6C63FF;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-nav a:hover { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back" href="/"><ion-icon name="arrow-back-outline"></ion-icon> Back to Savr</a>
+
+    <div class="meta">Apr 18, 2026 · Story · 4 min read</div>
+    <h1>Why I Built Savr — A Developer's Story</h1>
+
+    <div class="author">
+      <div class="author-avatar">MW</div>
+      <div>
+        <div class="author-name">Mwnswrang Wary</div>
+        <div class="author-role">Developer · Wary Dev.</div>
+      </div>
+    </div>
+
+    <div class="content">
+      <p>I never planned to build an expense tracker. Like most developers, I had a list of "cool" project ideas — games, AI tools, social apps. An expense tracker felt too boring, too ordinary. Then my bank account told me otherwise.</p>
+
+      <h2>The Problem</h2>
+      <p>I was spending money without really knowing where it was going. I tried a few popular expense tracker apps — some were too complex, some sent my data to servers I didn't control, and most were designed for Western markets with no real thought for Indian users.</p>
+
+      <div class="highlight">"Why do I need to create an account and sync my expenses to some company's server just to track what I spent at Swiggy?"</div>
+
+      <p>That question stuck with me. My financial data is personal. It should live on my device, not on a startup's database somewhere.</p>
+
+      <h2>The Build</h2>
+      <p>I started Savr as a weekend project. React Native with Expo because I wanted to ship fast. SQLite for local storage because <strong>your data belongs on your device</strong>. Google Drive for backup because you already trust Google with your files.</p>
+
+      <p>The first version was rough — basic expense entry, a simple list, nothing fancy. But it worked and it was fast. No loading spinners waiting for server responses. No login required to see your own data.</p>
+
+      <h2>What Savr Became</h2>
+      <p>Over the next few months it grew into something I'm genuinely proud of. Auto category detection, AI-powered budget recommendations, a spending heatmap, anomaly detection for unusual expenses, 30+ currencies with INR as default, and Google Drive backup that works silently in the background.</p>
+
+      <p>The architecture stayed true to the original idea: <strong>local-first, privacy-first</strong>. Your expenses are stored in SQLite on your device. Supabase only knows your name and email for authentication. The backup goes to your own Google Drive folder — I literally cannot access it.</p>
+
+      <h2>What's Next</h2>
+      <p>Savr just entered closed testing on the Google Play Store. The next milestone is production release — getting it in front of real users who want a simple, private, India-focused expense tracker.</p>
+
+      <p>After that, a Pro tier with recurring expenses, income tracking, and multiple accounts. But the core app — tracking expenses, setting budgets, seeing reports — will always be free.</p>
+
+      <p>If you're reading this and want to try Savr, download it from the Play Store and let me know what you think. Every piece of feedback helps.</p>
+    </div>
+
+    <div class="footer-nav">
+      <a href="/"><ion-icon name="home-outline"></ion-icon> Home</a>
+      <a href="/blog/posts/how-savr-protects-your-data.html">Next Post <ion-icon name="arrow-forward-outline"></ion-icon></a>
+    </div>
+  </div>
+</body>
+</html>
