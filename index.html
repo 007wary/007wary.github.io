@@ -5,113 +5,101 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Savr — Spend Smart, Save More</title>
   <style>
-    /* Reset and Core Layout */
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
-    }
-    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #0F0F0F;
-      /* Modern purple radial glow */
       background: radial-gradient(circle at top, #1a152e 0%, #0F0F0F 60%);
       color: #FFFFFF;
-      min-height: 100vh; 
-      display: flex; 
+      min-height: 100vh;
+      display: flex;
       flex-direction: column;
-      align-items: center; 
-      justify-content: center; /* Centered layout since images are gone */
-      padding: 40px 20px;
+      align-items: center;
+      padding: 60px 20px;
       overflow-x: hidden;
     }
 
-    /* Logo and Tagline */
-    .logo { 
-      font-size: 84px; /* Slightly larger for presence */
-      font-weight: 900; 
-      color: #6C63FF; 
-      letter-spacing: -4px; 
+    .logo {
+      font-size: 84px;
+      font-weight: 900;
+      color: #6C63FF;
+      letter-spacing: -4px;
       margin-bottom: 8px;
       text-shadow: 0 10px 40px rgba(108, 99, 255, 0.4);
     }
-    .tagline { 
-      color: #999; 
-      font-size: 20px; 
-      margin-bottom: 24px; 
+
+    .tagline {
+      color: #999;
+      font-size: 20px;
+      margin-bottom: 24px;
       font-weight: 400;
     }
 
-    /* Availability Badge */
     .badge {
-      background: rgba(108, 99, 255, 0.1); 
+      background: rgba(108, 99, 255, 0.1);
       color: #fff;
-      border: 1px solid rgba(108, 99, 255, 0.3); 
+      border: 1px solid rgba(108, 99, 255, 0.3);
       border-radius: 20px;
-      padding: 10px 20px; 
-      font-size: 14px; 
+      padding: 10px 20px;
+      font-size: 14px;
       font-weight: 600;
       margin-bottom: 48px;
     }
 
-    /* Features Grid */
     .features {
-      display: flex; 
-      flex-wrap: wrap; 
+      display: flex;
+      flex-wrap: wrap;
       gap: 12px;
-      justify-content: center; 
-      max-width: 700px; 
-      margin-bottom: 60px;
+      justify-content: center;
+      max-width: 700px;
+      margin-bottom: 48px;
     }
-    
+
     .feature {
       background: rgba(26, 26, 26, 0.6);
-      border: 1px solid #2A2A2A; 
-      border-radius: 12px; 
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
       padding: 14px 20px;
-      font-size: 15px; 
+      font-size: 15px;
       color: #ccc;
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
     }
-    
+
     .feature:hover {
       transform: translateY(-5px);
       border-color: #6C63FF;
       background: rgba(108, 99, 255, 0.05);
     }
 
-    /* Links and Buttons Container */
-    .links { 
-      display: flex; 
-      gap: 16px; 
-      margin-bottom: 80px; 
-      flex-wrap: wrap; 
-      justify-content: center; 
+    .links {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 80px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .link {
       text-decoration: none;
-      padding: 16px 32px; 
-      font-size: 15px; 
-      color: #6C63FF; 
-      border: 1px solid rgba(108, 99, 255, 0.3); 
-      border-radius: 14px; 
+      padding: 16px 32px;
+      font-size: 15px;
+      color: #6C63FF;
+      border: 1px solid rgba(108, 99, 255, 0.3);
+      border-radius: 14px;
       transition: all 0.3s ease;
       font-weight: 600;
     }
 
-    .link:hover { 
-      background: rgba(108, 99, 255, 0.1); 
+    .link:hover {
+      background: rgba(108, 99, 255, 0.1);
       transform: translateY(-3px);
       border-color: rgba(108, 99, 255, 0.6);
     }
 
-    /* Primary CTA Button */
     .link-primary {
-      background: #6C63FF; 
-      color: #FFFFFF !important; 
+      background: #6C63FF;
+      color: #FFFFFF !important;
       border: 1px solid #6C63FF;
       box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
     }
@@ -121,20 +109,149 @@
       box-shadow: 0 15px 35px rgba(108, 99, 255, 0.5);
     }
 
-    /* Footer */
-    .footer { 
-      color: #555; 
-      font-size: 14px; 
-      text-align: center; 
-      line-height: 2.2; 
-      margin-top: 40px;
+    /* ─── SECTION TITLE ─── */
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.8px;
+      margin-bottom: 8px;
+      text-align: center;
     }
-    .footer a {
+
+    .section-sub {
+      font-size: 15px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    /* ─── FAQ ─── */
+    .faq-container {
+      width: 100%;
+      max-width: 720px;
+      margin-bottom: 80px;
+    }
+
+    .faq-item {
+      background: rgba(26, 26, 26, 0.6);
+      border: 1px solid #2A2A2A;
+      border-radius: 14px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .faq-item.open {
+      border-color: rgba(108, 99, 255, 0.4);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      text-align: left;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-family: inherit;
+    }
+
+    .faq-question:hover { color: #6C63FF; }
+
+    .faq-icon {
+      font-size: 20px;
       color: #6C63FF;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.8;
+      padding: 0 24px;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 24px 20px;
+    }
+
+    /* ─── HELP CARDS ─── */
+    .help-container {
+      width: 100%;
+      max-width: 720px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 80px;
+    }
+
+    .help-card {
+      background: rgba(26, 26, 26, 0.6);
+      border: 1px solid #2A2A2A;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: all 0.3s ease;
       text-decoration: none;
     }
-    .footer a:hover {
-      text-decoration: underline;
+
+    .help-card:hover {
+      border-color: rgba(108, 99, 255, 0.4);
+      transform: translateY(-4px);
+      background: rgba(108, 99, 255, 0.05);
+    }
+
+    .help-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .help-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .help-desc {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      color: #555;
+      font-size: 14px;
+      text-align: center;
+      line-height: 2.2;
+      margin-top: 40px;
+    }
+
+    .footer a { color: #6C63FF; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+
+    .divider {
+      width: 100%;
+      max-width: 720px;
+      height: 1px;
+      background: #2A2A2A;
+      margin: 20px 0 60px;
     }
   </style>
 </head>
@@ -143,31 +260,162 @@
   <div class="logo">Savr</div>
   <p class="tagline">Spend smart, save more</p>
 
+  <div class="badge">📱 Available on Android · Google Play</div>
+
   <div class="features">
     <div class="feature">💰 Track Expenses</div>
     <div class="feature">📊 Smart Reports</div>
     <div class="feature">🎯 Set Budgets</div>
     <div class="feature">🔄 Recurring</div>
     <div class="feature">📤 CSV Export</div>
-    <div class="feature">☁️ Cloud Sync</div>
+    <div class="feature">☁️ Drive Backup</div>
     <div class="feature">📵 Offline</div>
     <div class="feature">🌍 30+ Currencies</div>
   </div>
 
   <div class="links">
-    <a class="link" href="https://007wary.github.io/Savr/privacy-policy.html">Privacy Policy</a>
-    <a class="link" href="https://007wary.github.io/Savr/terms-of-service.html">Terms of Service</a>
-    <a class="link" href="https://007wary.github.io/Savr/delete-account.html">Request Account Deletion</a>
+    <a class="link link-primary" href="https://play.google.com/store/apps/details?id=com.saver.savr" target="_blank">Download on Google Play</a>
+    <a class="link" href="/privacy-policy.html">Privacy Policy</a>
+    <a class="link" href="/terms-of-service.html">Terms of Service</a>
+    <a class="link" href="/delete-account.html">Delete Account</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HELP SECTION -->
+  <p class="section-title">Help & Support</p>
+  <p class="section-sub">Everything you need to get started with Savr</p>
+
+  <div class="help-container">
+    <a class="help-card" href="mailto:007mwnswrangwary@gmail.com">
+      <span class="help-icon">✉️</span>
+      <div class="help-title">Email Support</div>
+      <div class="help-desc">Contact us directly for any issues or questions</div>
+    </a>
+    <a class="help-card" href="/delete-account.html">
+      <span class="help-icon">🗑️</span>
+      <div class="help-title">Delete Account</div>
+      <div class="help-desc">Request complete deletion of your account and data</div>
+    </a>
+    <a class="help-card" href="/privacy-policy.html">
+      <span class="help-icon">🔒</span>
+      <div class="help-title">Privacy Policy</div>
+      <div class="help-desc">Learn how we handle and protect your data</div>
+    </a>
+    <a class="help-card" href="/terms-of-service.html">
+      <span class="help-icon">📄</span>
+      <div class="help-title">Terms of Service</div>
+      <div class="help-desc">Read our terms and conditions of use</div>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FAQ SECTION -->
+  <p class="section-title">Frequently Asked Questions</p>
+  <p class="section-sub">Quick answers to common questions</p>
+
+  <div class="faq-container">
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Is Savr free to use?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Yes! Savr is completely free to download and use. The app is supported by ads to keep it free for everyone.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Where is my data stored?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">All your financial data (expenses, budgets, goals) is stored locally on your device using SQLite. It never touches our servers. Backups are stored in your own Google Drive account — only you can access them.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Does Savr work offline?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Yes! Savr works completely offline. You can add, edit and delete expenses, view reports and budgets — all without an internet connection. Internet is only needed for Google Sign In and Google Drive backup.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How does Google Drive backup work?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Savr automatically backs up your data to a private Savr folder in your Google Drive. The backup is only accessible by you and the Savr app. If you reinstall the app or switch devices, Savr will detect the backup and offer to restore your data.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Can I use Savr on multiple devices?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Yes! Sign in with the same Google account on your new device and restore your data from the Google Drive backup. Your complete expense history will be restored.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How do I export my data?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Go to History tab → tap the Export button in the top right corner. Your expenses will be exported as a CSV file that you can open in Excel, Google Sheets or any spreadsheet app.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        How do I delete my account?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">You can request account deletion by visiting our Delete Account page or emailing us at 007mwnswrangwary@gmail.com. We will process your request within 30 days and remove all your data from our servers.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Which currencies does Savr support?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Savr supports 30+ currencies including INR, USD, EUR, GBP, JPY, AED, SGD and many more. You can change your currency anytime from Settings → Currency.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        Is my financial data shared with anyone?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">No. Your financial data is stored only on your device and in your personal Google Drive. We never have access to your expenses, budgets or any financial information. We only store basic profile info (name, email) for account management.</div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        I found a bug. How do I report it?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">Please email us at 007mwnswrangwary@gmail.com with a description of the bug and your device model. We'll look into it as soon as possible!</div>
+    </div>
+
   </div>
 
   <div class="footer">
     <p>© <span id="year">2026</span> Savr · Developed by Wary Dev.</p>
-    <p>Built with React Native & Supabase</p>
+    <p>Built with React Native & Expo</p>
     <p>Contact: <a href="mailto:007mwnswrangwary@gmail.com">007mwnswrangwary@gmail.com</a></p>
   </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear() >= 2026 ? new Date().getFullYear() : '2026';
+
+    function toggleFaq(btn) {
+      const item = btn.closest('.faq-item')
+      const isOpen = item.classList.contains('open')
+      // Close all open items
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'))
+      // Open clicked item if it was closed
+      if (!isOpen) item.classList.add('open')
+    }
   </script>
 
 </body>
