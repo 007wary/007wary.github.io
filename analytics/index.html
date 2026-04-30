@@ -303,6 +303,15 @@
 
     <!-- OVERVIEW TAB -->
     <div class="tab-panel active" id="tab-overview">
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;"></div>
+          <div class="card-title" style="margin-bottom:0;">Live users right now</div>
+          <div id="live-count" style="font-size:13px;color:var(--green);font-weight:600;margin-left:auto;"></div>
+        </div>
+        <div id="live-users-list"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+      </div>
+            
       <div class="grid4" id="metrics-grid">
         <div class="metric"><div class="metric-label">Total users</div><div class="metric-value" id="m-total">—</div><div class="metric-delta neutral" id="m-total-sub">Loading...</div></div>
         <div class="metric"><div class="metric-label">Active (7 days)</div><div class="metric-value" id="m-active7">—</div><div class="metric-delta neutral" id="m-active7-sub">Loading...</div></div>
@@ -332,13 +341,15 @@
         </div>
       </div>
 
-      <div class="card" style="margin-bottom:20px;">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
-          <div style="width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;"></div>
-          <div class="card-title" style="margin-bottom:0;">Live users right now</div>
-          <div id="live-count" style="font-size:13px;color:var(--green);font-weight:600;margin-left:auto;"></div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Users by country</div>
+          <div id="country-list"><div class="loading"><div class="spinner"></div></div></div>
         </div>
-        <div id="live-users-list"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+        <div class="card">
+          <div class="card-title">Users by timezone</div>
+          <div id="timezone-list"><div class="loading"><div class="spinner"></div></div></div>
+        </div>
       </div>
 
       <div class="grid3">
@@ -461,6 +472,8 @@ async function loadAll() {
     renderVersions(allUsers)
     renderDevices(allUsers)
     renderAndroid(allUsers)
+    renderCountries(allUsers)
+    renderTimezones(allUsers)
     renderUsersTable(allUsers)
     renderLiveUsers(allUsers)
     renderRecipientsPreview(allUsers)
@@ -547,6 +560,39 @@ function renderDevices(users) {
       <div class="bar-label" style="font-size:11px;">${d.length > 14 ? d.slice(0,14)+'…' : d}</div>
       <div class="bar-bg"><div class="bar-fill" style="width:${(c/max)*100}%;background:var(--accent2);"></div></div>
       <div class="bar-val">${c}</div>
+    </div>
+  `).join('')
+}
+
+function renderCountries(users) {
+  const el = document.getElementById('country-list')
+  const map = {}
+  users.forEach(u => { if(u.country) map[u.country] = (map[u.country]||0)+1 })
+  const sorted = Object.entries(map).sort((a,b) => b[1]-a[1])
+  if (!sorted.length) { el.innerHTML = '<div class="empty">No data yet</div>'; return }
+  const max = sorted[0][1]
+  const flags = { IN:'🇮🇳', US:'🇺🇸', GB:'🇬🇧', CA:'🇨🇦', AU:'🇦🇺', DE:'🇩🇪', FR:'🇫🇷', JP:'🇯🇵', SG:'🇸🇬', AE:'🇦🇪', PK:'🇵🇰', BD:'🇧🇩', NP:'🇳🇵' }
+  el.innerHTML = sorted.map(([c,n]) => `
+    <div class="bar-row">
+      <div class="bar-label">${flags[c] || '🌍'} ${c}</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${(n/max)*100}%;background:var(--accent);"></div></div>
+      <div class="bar-val">${n}</div>
+    </div>
+  `).join('')
+}
+
+function renderTimezones(users) {
+  const el = document.getElementById('timezone-list')
+  const map = {}
+  users.forEach(u => { if(u.timezone) map[u.timezone] = (map[u.timezone]||0)+1 })
+  const sorted = Object.entries(map).sort((a,b) => b[1]-a[1]).slice(0,8)
+  if (!sorted.length) { el.innerHTML = '<div class="empty">No data yet</div>'; return }
+  const max = sorted[0][1]
+  el.innerHTML = sorted.map(([tz,n]) => `
+    <div class="bar-row">
+      <div class="bar-label" style="font-size:11px;">${tz.split('/').pop().replace('_',' ')}</div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${(n/max)*100}%;background:var(--accent2);"></div></div>
+      <div class="bar-val">${n}</div>
     </div>
   `).join('')
 }
