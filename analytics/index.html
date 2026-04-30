@@ -731,9 +731,6 @@ async function sendNotification() {
   statusEl.className = 'notif-status'
   statusEl.style.display = 'none'
 
-  let sent = 0
-  let failed = 0
-
   try {
     const res = await fetch(PROXY_URL + '?action=notify', {
       method: 'POST',
@@ -811,7 +808,7 @@ socket.onopen = () => {
 
 socket.onmessage = (e) => {
   const msg = JSON.parse(e.data)
-  if (msg.event === 'postgres_changes' || (msg.payload && msg.payload.data)) {
+  if (msg.event === 'postgres_changes') {
     loadAll()
   }
 }
