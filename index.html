@@ -30,7 +30,6 @@
   <meta name="twitter:description" content="Track expenses, set budgets, get smart insights. Free Android app.">
   <meta name="twitter:image" content="https://007wary.github.io/og-image.png">
 
-  <!-- Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -41,7 +40,15 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
     "description": "Free expense tracker and budget planner for Android. Track expenses, set budgets, get smart insights. Your data stays on your device.",
     "author": { "@type": "Person", "name": "Mwnswrang Wary" },
-    "url": "https://play.google.com/store/apps/details?id=com.saver.savr"
+    "url": "https://play.google.com/store/apps/details?id=com.saver.savr",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.saver.savr",
+    "installUrl": "https://play.google.com/store/apps/details?id=com.saver.savr",
+    "softwareVersion": "1.7.1",
+    "datePublished": "2026-04-18",
+    "dateModified": "2026-04-30",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "screenshot": "https://007wary.github.io/og-image.png"
   }
   </script>
 
@@ -120,6 +127,8 @@
       justify-content: center;
       max-width: 700px;
       margin-bottom: 48px;
+      list-style: none;
+      padding: 0;
     }
 
     .feature {
@@ -422,9 +431,17 @@
     .footer a:hover { text-decoration: underline; }
 
     @media (max-width: 480px) {
-      .logo { font-size: 60px; }
+      .logo { font-size: 56px; }
+      .tagline { font-size: 16px; }
       .section-title { font-size: 22px; }
       .help-container { grid-template-columns: repeat(2, 1fr); }
+      .links { flex-direction: column; align-items: center; width: 100%; max-width: 320px; }
+      .link { width: 100%; text-align: center; }
+      .blog-card { flex-direction: column; gap: 12px; }
+      .blog-arrow { display: none; }
+      .features { gap: 8px; }
+      .feature { font-size: 13px; padding: 10px 14px; }
+      body { padding: 40px 16px; }
     }
   </style>
 </head>
@@ -500,16 +517,16 @@
       <text x="250" y="280" font-family="system-ui" font-size="9" fill="#6C63FF" text-anchor="middle" font-weight="600">☁️ Backed up to Google Drive</text>
     </svg>
 
-    <div class="features">
-      <div class="feature"><ion-icon name="restaurant-outline"></ion-icon> Track Expenses</div>
-      <div class="feature"><ion-icon name="bar-chart-outline"></ion-icon> Smart Reports</div>
-      <div class="feature"><ion-icon name="wallet-outline"></ion-icon> Set Budgets</div>
-      <div class="feature"><ion-icon name="repeat-outline"></ion-icon> Recurring</div>
-      <div class="feature"><ion-icon name="share-outline"></ion-icon> CSV Export</div>
-      <div class="feature"><ion-icon name="cloud-outline"></ion-icon> Drive Backup</div>
-      <div class="feature"><ion-icon name="wifi-outline"></ion-icon> Offline</div>
-      <div class="feature"><ion-icon name="globe-outline"></ion-icon> 30+ Currencies</div>
-    </div>
+    <ul class="features">
+      <li class="feature"><ion-icon name="restaurant-outline"></ion-icon> Track Expenses</li>
+      <li class="feature"><ion-icon name="bar-chart-outline"></ion-icon> Smart Reports</li>
+      <li class="feature"><ion-icon name="wallet-outline"></ion-icon> Set Budgets</li>
+      <li class="feature"><ion-icon name="repeat-outline"></ion-icon> Recurring</li>
+      <li class="feature"><ion-icon name="share-outline"></ion-icon> CSV Export</li>
+      <li class="feature"><ion-icon name="cloud-outline"></ion-icon> Drive Backup</li>
+      <li class="feature"><ion-icon name="wifi-outline"></ion-icon> Offline</li>
+      <li class="feature"><ion-icon name="globe-outline"></ion-icon> 30+ Currencies</li>
+    </ul>
 
     <div class="links">
       <a class="link link-primary" href="https://play.google.com/store/apps/details?id=com.saver.savr" target="_blank">Download on Google Play</a>
