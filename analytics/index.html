@@ -319,6 +319,19 @@
         <div class="metric"><div class="metric-label">FCM registered</div><div class="metric-value" id="m-fcm">—</div><div class="metric-delta neutral" id="m-fcm-sub">Can receive notifications</div></div>
       </div>
 
+      <div class="card" style="margin-bottom:20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div class="card-title" style="margin-bottom:0;">DAU — Daily Active Users (last 30 days)</div>
+          <div style="font-size:12px;color:var(--text2);">MAU: <span id="mau-count" style="color:var(--accent);font-weight:600;">—</span></div>
+        </div>
+        <div class="chart-bars" id="dau-chart" style="height:100px;"><div class="loading"><div class="spinner"></div> Loading...</div></div>
+        <div style="display:flex;gap:24px;margin-top:12px;">
+          <div style="font-size:12px;color:var(--text2);">Today: <span id="dau-today" style="color:var(--green);font-weight:600;">—</span></div>
+          <div style="font-size:12px;color:var(--text2);">7d avg: <span id="dau-avg" style="color:var(--accent);font-weight:600;">—</span></div>
+          <div style="font-size:12px;color:var(--text2);">Peak: <span id="dau-peak" style="color:var(--accent3);font-weight:600;">—</span></div>
+        </div>
+      </div>
+
       <div class="grid2">
         <div class="card">
           <div class="card-title">Signups — last 14 days</div>
@@ -383,11 +396,23 @@
             </tbody>
           </table>
         </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);">
+          <div style="font-size:13px;color:var(--text2);" id="pagination-info"></div>
+          <div style="display:flex;gap:8px;">
+            <button onclick="changePage(-1)" id="prev-btn" style="background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 14px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;">← Prev</button>
+            <div id="page-numbers" style="display:flex;gap:4px;"></div>
+            <button onclick="changePage(1)" id="next-btn" style="background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 14px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;">Next →</button>
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- NOTIFICATIONS TAB -->
     <div class="tab-panel" id="tab-notifications">
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-title">Notification history</div>
+        <div id="notif-history"><div class="empty">No notifications sent yet</div></div>
+      </div>
       <div class="grid2">
         <div class="card">
           <div class="card-title">Send push notification</div>
@@ -434,6 +459,14 @@
   </div>
 </div>
 
+<!-- USER DETAIL MODAL -->
+<div id="user-modal" style="display:none;position:fixed;inset:0;background:#00000088;z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px;width:480px;max-width:90vw;max-height:85vh;overflow-y:auto;position:relative;">
+    <button onclick="closeUserModal()" style="position:absolute;top:16px;right:16px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 12px;color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;">✕ Close</button>
+    <div id="user-modal-content"></div>
+  </div>
+</div>
+
 <script>
 const PROXY_URL = 'https://fsrbsqhlgfdqugixqtxc.supabase.co/functions/v1/analytics-proxy'
 const DASHBOARD_SECRET = '007Mw@@==00'
@@ -441,6 +474,9 @@ const PASSWORD = '007Mw@@==00'
 const FCM_PROJECT_ID = 'savr-b6c11'
 
 let allUsers = []
+let currentPage = 1
+const PAGE_SIZE = 20
+let filteredUsers = []
 
 function doLogin() {
   const val = document.getElementById('pwd-input').value
@@ -479,6 +515,7 @@ async function loadAll() {
     const users = await supabaseFetch()
     allUsers = users || []
     renderMetrics(allUsers)
+    renderDAUChart(allUsers)
     renderSignupChart(allUsers)
     renderVersions(allUsers)
     renderDevices(allUsers)
@@ -521,6 +558,40 @@ function renderMetrics(users) {
   document.getElementById('m-new7').textContent = new7
   document.getElementById('m-new30').textContent = new30
   document.getElementById('m-retention').textContent = retention + '%'
+}
+
+function renderDAUChart(users) {
+  const el = document.getElementById('dau-chart')
+  const now = new Date()
+  const days = []
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(now)
+    d.setDate(d.getDate() - i)
+    const str = d.toISOString().split('T')[0]
+    const count = users.filter(u => u.last_active && u.last_active.startsWith(str)).length
+    days.push({ label: i === 0 ? 'Today' : d.toLocaleString('default', { weekday: 'short' }).slice(0,1), count, str, isToday: i === 0 })
+  }
+  const max = Math.max(...days.map(d => d.count), 1)
+  const today = days[days.length - 1].count
+  const last7 = days.slice(-7)
+  const avg7 = Math.round(last7.reduce((s, d) => s + d.count, 0) / 7)
+  const peak = Math.max(...days.map(d => d.count))
+  const mau = users.filter(u => {
+    const d = new Date(now - 30*24*60*60*1000)
+    return u.last_active && new Date(u.last_active) > d
+  }).length
+
+  document.getElementById('mau-count').textContent = mau
+  document.getElementById('dau-today').textContent = today
+  document.getElementById('dau-avg').textContent = avg7
+  document.getElementById('dau-peak').textContent = peak
+
+  el.innerHTML = days.map(d => `
+    <div class="chart-col">
+      <div class="chart-bar" style="height:${Math.max((d.count/max)*100, d.count > 0 ? 6 : 0)}%;background:${d.isToday ? 'var(--green)' : d.count > 0 ? 'var(--accent)' : 'var(--bg3)'};opacity:${d.isToday ? 1 : 0.7};"></div>
+      <div class="chart-lbl" style="${d.isToday ? 'color:var(--green);' : ''}">${d.isToday ? '·' : ''}</div>
+    </div>
+  `).join('')
 }
 
 function renderSignupChart(users) {
@@ -625,16 +696,37 @@ function renderAndroid(users) {
 }
 
 function renderUsersTable(users) {
+  filteredUsers = users
+  currentPage = 1
+  renderPage()
+}
+
+function renderPage() {
   const tbody = document.getElementById('users-tbody')
-  if (!users.length) { tbody.innerHTML = '<tr><td colspan="6"><div class="empty">No users yet</div></td></tr>'; return }
+  const total = filteredUsers.length
+  const totalPages = Math.max(Math.ceil(total / PAGE_SIZE), 1)
+  currentPage = Math.min(Math.max(currentPage, 1), totalPages)
+  const start = (currentPage - 1) * PAGE_SIZE
+  const end = Math.min(start + PAGE_SIZE, total)
+  const pageUsers = filteredUsers.slice(start, end)
+
+  if (!total) {
+    tbody.innerHTML = '<tr><td colspan="6"><div class="empty">No users yet</div></td></tr>'
+    document.getElementById('pagination-info').textContent = ''
+    document.getElementById('page-numbers').innerHTML = ''
+    document.getElementById('prev-btn').style.opacity = '0.3'
+    document.getElementById('next-btn').style.opacity = '0.3'
+    return
+  }
+
   const now = new Date()
-  tbody.innerHTML = users.map(u => {
+  tbody.innerHTML = pageUsers.map(u => {
     const lastActive = u.last_active ? new Date(u.last_active) : null
     const isActive = lastActive && (now - lastActive) < 7*24*60*60*1000
     const lastActiveStr = lastActive ? timeAgo(lastActive) : 'Never'
     const name = u.full_name || u.email?.split('@')[0] || '—'
     const initials = name.slice(0,2).toUpperCase()
-    return `<tr>
+    return `<tr style="cursor:pointer;" onclick="openUserModal('${u.id}')">
       <td>
         <div style="display:flex;align-items:center;gap:10px;">
           <div style="width:32px;height:32px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;">${initials}</div>
@@ -651,6 +743,33 @@ function renderUsersTable(users) {
       <td style="font-size:12px;">${u.fcm_token ? '<span style="color:var(--green);">✓</span>' : '<span style="color:var(--text3);">—</span>'}</td>
     </tr>`
   }).join('')
+
+  document.getElementById('pagination-info').textContent = `Showing ${start + 1}–${end} of ${total} users`
+  document.getElementById('prev-btn').style.opacity = currentPage === 1 ? '0.3' : '1'
+  document.getElementById('next-btn').style.opacity = currentPage === totalPages ? '0.3' : '1'
+
+  const pageNums = document.getElementById('page-numbers')
+  pageNums.innerHTML = Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+    let page = i + 1
+    if (totalPages > 5) {
+      if (currentPage <= 3) page = i + 1
+      else if (currentPage >= totalPages - 2) page = totalPages - 4 + i
+      else page = currentPage - 2 + i
+    }
+    return `<button onclick="goToPage(${page})" style="background:${page === currentPage ? 'var(--accent)' : 'var(--bg3)'};border:1px solid ${page === currentPage ? 'var(--accent)' : 'var(--border2)'};border-radius:8px;padding:7px 12px;color:${page === currentPage ? '#fff' : 'var(--text2)'};cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;">${page}</button>`
+  }).join('')
+}
+
+function changePage(dir) {
+  const total = filteredUsers.length
+  const totalPages = Math.max(Math.ceil(total / PAGE_SIZE), 1)
+  currentPage = Math.min(Math.max(currentPage + dir, 1), totalPages)
+  renderPage()
+}
+
+function goToPage(page) {
+  currentPage = page
+  renderPage()
 }
 
 function renderLiveUsers(users) {
@@ -663,7 +782,9 @@ function renderLiveUsers(users) {
     el.innerHTML = '<div style="font-size:13px;color:var(--text3);padding:8px 0;">No users online right now</div>'
     return
   }
-  el.innerHTML = online.map(u => {
+  const visible = online.slice(0, 5)
+  const extra = online.length - 5
+  el.innerHTML = visible.map(u => {
     const name = u.full_name || u.email?.split('@')[0] || '—'
     const initials = name.slice(0,2).toUpperCase()
     const onlineSince = u.online_at ? timeAgo(new Date(u.online_at)) : ''
@@ -679,7 +800,7 @@ function renderLiveUsers(users) {
         <div style="font-size:11px;color:var(--green);">● online ${onlineSince}</div>
       </div>
     `
-  }).join('')
+  }).join('') + (extra > 0 ? `<div style="font-size:12px;color:var(--text2);padding:10px 0;">+${extra} more users online</div>` : '')
 }
 
 function renderRecipientsPreview(users) {
@@ -750,6 +871,12 @@ async function sendNotification() {
     if (result.sent > 0) {
       statusEl.className = 'notif-status success'
       statusEl.textContent = `✓ Sent to ${result.sent} user${result.sent !== 1 ? 's' : ''}${result.failed > 0 ? ` (${result.failed} failed)` : ''}`
+      saveNotifHistory(title, body, result.sent)
+      document.getElementById('notif-title').value = ''
+      document.getElementById('notif-body').value = ''
+      document.getElementById('notif-target').value = 'all'
+      updatePreview()
+      renderRecipientsPreview(allUsers)
     } else {
       statusEl.className = 'notif-status error'
       statusEl.textContent = `Failed to send — check FCM tokens`
@@ -762,11 +889,95 @@ async function sendNotification() {
   }
 }
 
+function saveNotifHistory(title, body, count) {
+  const history = JSON.parse(localStorage.getItem('savr_notif_history') || '[]')
+  history.unshift({
+    title,
+    body,
+    count,
+    time: new Date().toISOString()
+  })
+  if (history.length > 20) history.pop()
+  localStorage.setItem('savr_notif_history', JSON.stringify(history))
+  renderNotifHistory()
+}
+
+function renderNotifHistory() {
+  const el = document.getElementById('notif-history')
+  const history = JSON.parse(localStorage.getItem('savr_notif_history') || '[]')
+  if (!history.length) {
+    el.innerHTML = '<div class="empty">No notifications sent yet</div>'
+    return
+  }
+  el.innerHTML = history.map(n => `
+    <div class="row-item">
+      <div style="flex:1;">
+        <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">${n.title}</div>
+        <div style="font-size:12px;color:var(--text2);">${n.body}</div>
+      </div>
+      <div style="text-align:right;flex-shrink:0;margin-left:16px;">
+        <div style="font-size:12px;color:var(--green);font-weight:500;">${n.count} sent</div>
+        <div style="font-size:11px;color:var(--text3);">${timeAgo(new Date(n.time))}</div>
+      </div>
+    </div>
+  `).join('')
+}
+
 function updatePreview() {
   const title = document.getElementById('notif-title').value.trim()
   const body = document.getElementById('notif-body').value.trim()
   document.getElementById('preview-title').textContent = title || 'Notification title'
   document.getElementById('preview-body').textContent = body || 'Notification message will appear here...'
+}
+
+function openUserModal(userId) {
+  const u = allUsers.find(u => u.id === userId)
+  if (!u) return
+  const name = u.full_name || u.email?.split('@')[0] || '—'
+  const initials = name.slice(0,2).toUpperCase()
+  const lastActive = u.last_active ? timeAgo(new Date(u.last_active)) : 'Never'
+  const signupDate = u.created_at ? new Date(u.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'
+  const isOnline = u.is_online
+  const isActive = u.last_active && (Date.now() - new Date(u.last_active)) < 7*24*60*60*1000
+
+  document.getElementById('user-modal-content').innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;">
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;flex-shrink:0;">${initials}</div>
+      <div>
+        <div style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:2px;">${name}</div>
+        <div style="font-size:13px;color:var(--text2);">${u.email || '—'}</div>
+      </div>
+      <div style="margin-left:auto;">
+        <span style="font-size:11px;padding:4px 10px;border-radius:20px;background:${isOnline ? '#00D9A522' : 'var(--bg3)'};color:${isOnline ? 'var(--green)' : 'var(--text3)'};border:1px solid ${isOnline ? '#00D9A533' : 'var(--border2)'};">${isOnline ? '● Online' : 'Offline'}</span>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      ${detailItem('App Version', u.app_version ? 'v' + u.app_version : '—')}
+      ${detailItem('Device', u.device_model || '—')}
+      ${detailItem('Android', u.android_version ? 'Android ' + u.android_version : '—')}
+      ${detailItem('Country', u.country || '—')}
+      ${detailItem('Timezone', u.timezone?.split('/').pop().replace('_',' ') || '—')}
+      ${detailItem('Signed up', signupDate)}
+      ${detailItem('Last active', lastActive)}
+      ${detailItem('7d status', isActive ? '✅ Active' : '⚪ Inactive')}
+      ${detailItem('FCM token', u.fcm_token ? '✅ Registered' : '❌ Not registered')}
+      ${detailItem('Online at', u.online_at ? timeAgo(new Date(u.online_at)) : '—')}
+    </div>
+  `
+  document.getElementById('user-modal').style.display = 'flex'
+}
+
+function detailItem(label, value) {
+  return `
+    <div style="background:var(--bg3);border-radius:10px;padding:12px 14px;border:1px solid var(--border2);">
+      <div style="font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;">${label}</div>
+      <div style="font-size:13px;font-weight:500;color:var(--text);">${value}</div>
+    </div>
+  `
+}
+
+function closeUserModal() {
+  document.getElementById('user-modal').style.display = 'none'
 }
 
 function filterUsers() {
@@ -775,7 +986,9 @@ function filterUsers() {
     (u.email||'').toLowerCase().includes(q) ||
     (u.full_name||'').toLowerCase().includes(q)
   )
-  renderUsersTable(filtered)
+  filteredUsers = filtered
+  currentPage = 1
+  renderPage()
 }
 
 function timeAgo(date) {
@@ -791,6 +1004,10 @@ function timeAgo(date) {
 }
 
 document.getElementById('notif-target').addEventListener('change', () => renderRecipientsPreview(allUsers))
+document.getElementById('user-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeUserModal()
+})
+renderNotifHistory()
 setInterval(() => loadAll(), 30 * 1000)
 
 // Supabase Realtime with anon key — safe to expose
