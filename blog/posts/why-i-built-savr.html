@@ -42,6 +42,8 @@
   }
   </script>
 
+  <script type="module" src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/7.1.0/ionicons/ionicons.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -49,142 +51,105 @@
       background: radial-gradient(circle at top, #1a152e 0%, #0F0F0F 60%);
       color: #FFFFFF;
       min-height: 100vh;
-      padding: 40px 20px;
-    }
-    .container { max-width: 680px; margin: 0 auto; }
-    .back {
-      display: inline-flex;
+      display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 6px;
-      color: #6C63FF;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 40px;
+      padding: 100px 20px 60px;
+      overflow-x: hidden;
     }
-    .back:hover { opacity: 0.8; }
-    .meta {
-      font-size: 12px;
-      color: #555;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-size: 36px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -1px;
-      line-height: 1.2;
-      margin-bottom: 24px;
-    }
-    .author {
+
+    /* HEADER */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1a1a1a;
+      padding: 0 32px;
+      height: 60px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 40px;
-      padding-bottom: 32px;
-      border-bottom: 1px solid #2A2A2A;
+      justify-content: space-between;
     }
-    .author-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: rgba(108, 99, 255, 0.2);
-      border: 1px solid rgba(108, 99, 255, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 700;
-      color: #6C63FF;
+    .header-brand { font-size: 22px; font-weight: 900; color: #6C63FF; text-decoration: none; letter-spacing: -1px; }
+    .header-nav { display: flex; align-items: center; gap: 8px; }
+    .header-nav a { color: #888; text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 10px; transition: all 0.2s ease; }
+    .header-nav a:hover, .header-nav a.active { color: #fff; background: rgba(255,255,255,0.06); }
+    .hamburger { display: none; background: none; border: none; color: #888; cursor: pointer; padding: 8px; font-size: 22px; }
+    .mobile-menu { display: none; position: fixed; top: 60px; left: 0; right: 0; background: rgba(10,10,10,0.98); border-bottom: 1px solid #1a1a1a; padding: 16px 24px; flex-direction: column; gap: 4px; z-index: 999; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #888; text-decoration: none; font-size: 15px; font-weight: 500; padding: 12px 16px; border-radius: 10px; transition: all 0.2s ease; }
+    .mobile-menu a:hover { color: #fff; background: rgba(255,255,255,0.06); }
+    @media (max-width: 600px) {
+      .header-nav { display: none; }
+      .hamburger { display: block; }
+      .header { padding: 0 20px; }
+      body { padding-top: 80px; }
     }
+
+    /* PAGE */
+    .container { max-width: 680px; width: 100%; }
+    .meta { font-size: 12px; color: #555; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px; }
+    h1 { font-size: 36px; font-weight: 900; color: #fff; letter-spacing: -1px; line-height: 1.2; margin-bottom: 24px; }
+    .author { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid #2A2A2A; }
+    .author-avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(108,99,255,0.2); border: 1px solid rgba(108,99,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: #6C63FF; }
     .author-name { font-size: 14px; font-weight: 600; color: #fff; }
     .author-role { font-size: 12px; color: #555; }
     .content { line-height: 1.9; color: #bbb; font-size: 16px; }
     .content p { margin-bottom: 24px; }
-    .content h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      margin: 40px 0 16px;
-      letter-spacing: -0.3px;
-    }
+    .content h2 { font-size: 22px; font-weight: 700; color: #fff; margin: 40px 0 16px; letter-spacing: -0.3px; }
     .content strong { color: #fff; }
-    .highlight {
-      background: rgba(108, 99, 255, 0.08);
-      border-left: 3px solid #6C63FF;
-      padding: 16px 20px;
-      border-radius: 0 10px 10px 0;
-      margin: 24px 0;
-      color: #aaa;
-      font-style: italic;
-    }
-    .share-section {
-      margin-top: 48px;
-      padding: 24px;
-      background: rgba(26,26,26,0.6);
-      border: 1px solid #2A2A2A;
-      border-radius: 16px;
-      text-align: center;
-    }
+    .highlight { background: rgba(108,99,255,0.08); border-left: 3px solid #6C63FF; padding: 16px 20px; border-radius: 0 10px 10px 0; margin: 24px 0; color: #aaa; font-style: italic; }
+    .footer-nav { margin-top: 60px; padding-top: 32px; border-top: 1px solid #2A2A2A; display: flex; justify-content: space-between; align-items: center; }
+    .footer-nav a { color: #6C63FF; text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+    .footer-nav a:hover { opacity: 0.8; }
+    .share-section { margin-top: 48px; padding: 24px; background: rgba(26,26,26,0.6); border: 1px solid #2A2A2A; border-radius: 16px; text-align: center; }
     .share-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 16px; }
     .share-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .share-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid #2A2A2A;
-      background: rgba(26,26,26,0.8);
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; text-decoration: none; border: 1px solid #2A2A2A; background: rgba(26,26,26,0.8); color: #fff; cursor: pointer; transition: all 0.2s ease; font-family: inherit; }
     .share-btn:hover { transform: translateY(-2px); border-color: rgba(108,99,255,0.4); }
     .share-btn.whatsapp:hover { background: rgba(37,211,102,0.1); border-color: #25D366; }
     .share-btn.twitter:hover { background: rgba(29,161,242,0.1); border-color: #1DA1F2; }
     .share-btn.copy:hover { background: rgba(108,99,255,0.1); border-color: #6C63FF; }
     .copied-msg { font-size: 12px; color: #00D9A5; margin-top: 10px; display: none; }
-    .footer-nav {
-      margin-top: 40px;
-      padding-top: 32px;
-      border-top: 1px solid #2A2A2A;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-nav a {
-      color: #6C63FF;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .footer-nav a:hover { opacity: 0.8; }
+
+    /* FOOTER */
+    .divider { width: 100%; max-width: 680px; height: 1px; background: #2A2A2A; margin: 40px 0; }
+    .footer { color: #555; font-size: 14px; text-align: center; line-height: 2.2; }
+    .footer a { color: #6C63FF; text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
   </style>
 </head>
 <body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <a class="header-brand" href="/">Savr</a>
+    <nav class="header-nav">
+      <a href="/about.html">About</a>
+      <a href="/blog/index.html" class="active">Blog</a>
+      <a href="/delete-account.html">Delete Account</a>
+    </nav>
+    <button class="hamburger" onclick="toggleMenu()" id="hamburger-btn">☰</button>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/about.html" onclick="toggleMenu()">About</a>
+    <a href="/blog/index.html" onclick="toggleMenu()">Blog</a>
+    <a href="/delete-account.html" onclick="toggleMenu()">Delete Account</a>
+  </div>
+
   <div class="container">
-
-    <a class="back" href="/">&#8592; Back to Savr</a>
-
-    <div class="meta">Apr 18, 2026 &middot; Story &middot; 4 min read</div>
-    <h1>Why I Built Savr &mdash; A Developer's Story</h1>
+    <div class="meta">Apr 18, 2026 · Story · 4 min read</div>
+    <h1>Why I Built Savr — A Developer's Story</h1>
 
     <div class="author">
       <div class="author-avatar">MW</div>
       <div>
         <div class="author-name">Mwnswrang Wary</div>
-        <div class="author-role">Developer &middot; Wary Dev.</div>
+        <div class="author-role">Developer · Wary Dev.</div>
       </div>
     </div>
 
@@ -232,17 +197,28 @@
           Copy Link
         </button>
       </div>
-      <div class="copied-msg" id="copiedMsg">&#10003; Link copied!</div>
+      <div class="copied-msg" id="copiedMsg">✅ Link copied!</div>
     </div>
 
     <div class="footer-nav">
-      <a href="/">&#8962; Home</a>
-      <a href="/blog/posts/how-savr-protects-your-data.html">Next Post &#8594;</a>
+      <a href="/blog/index.html"><ion-icon name="list-outline"></ion-icon> All Posts</a>
+      <a href="/blog/posts/how-savr-protects-your-data.html">Next Post <ion-icon name="arrow-forward-outline"></ion-icon></a>
     </div>
+  </div>
 
+  <div class="divider"></div>
+  <div class="footer">
+    <div class="footer-links">
+      <a href="/privacy-policy.html">Privacy Policy</a>
+      <a href="/terms-of-service.html">Terms of Service</a>
+    </div>
+    <p>© <span id="year">2026</span> Savr · Developed by Wary Dev.</p>
+    <p>Built with React Native & Expo</p>
+    <p>Contact: <a href="mailto:007mwnswrangwary@gmail.com">007mwnswrangwary@gmail.com</a></p>
   </div>
 
   <script>
+    document.getElementById('year').textContent = new Date().getFullYear()
     function copyLink() {
       navigator.clipboard.writeText(window.location.href).then(() => {
         const msg = document.getElementById('copiedMsg')
@@ -250,6 +226,22 @@
         setTimeout(() => msg.style.display = 'none', 3000)
       })
     }
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu')
+      const btn = document.getElementById('hamburger-btn')
+      const isOpen = menu.classList.contains('open')
+      menu.classList.toggle('open')
+      btn.textContent = isOpen ? '☰' : '✕'
+    }
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mobile-menu')
+      const btn = document.getElementById('hamburger-btn')
+      if (!menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.remove('open')
+        btn.textContent = '☰'
+      }
+    })
   </script>
+
 </body>
 </html>
