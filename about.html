@@ -71,46 +71,6 @@
       margin-bottom: 20px;
     }
 
-    /* APP HERO CARD */
-    .app-card {
-      background: rgba(108,99,255,0.08);
-      border: 1px solid rgba(108,99,255,0.2);
-      border-radius: 20px;
-      padding: 32px;
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      margin-bottom: 60px;
-    }
-    .app-icon {
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      background: #6C63FF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 36px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -2px;
-    }
-    .app-info h2 { font-size: 28px; font-weight: 900; color: #fff; letter-spacing: -1px; margin-bottom: 4px; }
-    .app-info p { font-size: 14px; color: #666; margin-bottom: 12px; }
-    .app-meta { display: flex; gap: 10px; flex-wrap: wrap; }
-    .pill {
-      font-size: 11px;
-      padding: 4px 10px;
-      border-radius: 20px;
-      background: rgba(108,99,255,0.15);
-      border: 1px solid rgba(108,99,255,0.3);
-      color: #6C63FF;
-      font-weight: 600;
-    }
-    .pill.green { background: rgba(0,217,165,0.1); border-color: rgba(0,217,165,0.3); color: #00D9A5; }
-    .pill.yellow { background: rgba(255,184,0,0.1); border-color: rgba(255,184,0,0.3); color: #FFB800; }
-
     /* FEATURES GRID */
     .features-grid {
       display: grid;
@@ -128,25 +88,6 @@
     .feature-icon { font-size: 24px; margin-bottom: 10px; display: block; }
     .feature-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 4px; }
     .feature-desc { font-size: 13px; color: #666; line-height: 1.6; }
-
-    /* TECH STACK */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
-    .stack-card {
-      background: rgba(26,26,26,0.6);
-      border: 1px solid #2A2A2A;
-      border-radius: 14px;
-      padding: 16px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .stack-card:hover { border-color: rgba(108,99,255,0.4); transform: translateY(-2px); }
-    .stack-icon { font-size: 28px; margin-bottom: 8px; display: block; }
-    .stack-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .stack-desc { font-size: 11px; color: #555; }
 
     /* CHANGELOG */
     .changelog { display: flex; flex-direction: column; gap: 0; }
@@ -258,21 +199,6 @@
       </p>
     </div>
 
-    <!-- APP HERO CARD -->
-    <div class="app-card">
-      <div class="app-icon">S</div>
-      <div class="app-info">
-        <h2>Savr</h2>
-        <p>Expense Tracker & Budget Planner for Android</p>
-        <div class="app-meta">
-          <span class="pill">v1.8.2</span>
-          <span class="pill green">Free</span>
-          <span class="pill green">Offline</span>
-          <span class="pill yellow">Android</span>
-        </div>
-      </div>
-    </div>
-
     <!-- FEATURES -->
     <div class="section">
       <div class="section-title">Features</div>
@@ -316,45 +242,6 @@
           <ion-icon class="feature-icon" name="globe-outline" style="color:#FFB800;"></ion-icon>
           <div class="feature-name">30+ Currencies</div>
           <div class="feature-desc">Support for INR, USD, EUR, GBP, AED, SGD and 30+ more currencies.</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- TECH STACK -->
-    <div class="section">
-      <div class="section-title">Tech Stack</div>
-      <div class="stack-grid">
-        <div class="stack-card">
-          <span class="stack-icon">⚛️</span>
-          <div class="stack-name">React Native</div>
-          <div class="stack-desc">Expo SDK 54</div>
-        </div>
-        <div class="stack-card">
-          <span class="stack-icon">🗄️</span>
-          <div class="stack-name">SQLite</div>
-          <div class="stack-desc">Local storage</div>
-        </div>
-        <div class="stack-card">
-          <span class="stack-icon">🔐</span>
-          <div class="stack-name">Supabase</div>
-          <div class="stack-desc">Auth only</div>
-        </div>
-        <div class="stack-card">
-          <span class="stack-icon">☁️</span>
-          <div class="stack-name">Google Drive</div>
-          <div class="stack-desc">Auto backup</div>
-        </div>
-        <div class="stack-card">
-          <span class="stack-icon">🔥</span>
-          <div class="stack-name">Firebase</div>
-          <div class="stack-desc">Analytics & FCM</div>
-        </div>
-        <div class="stack-card">
-          <span class="stack-icon">⚙️</span>
-          <div class="stack-name">GitHub Actions</div>
-          <div class="stack-desc">CI/CD builds</div>
         </div>
       </div>
     </div>
