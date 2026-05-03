@@ -710,8 +710,8 @@ function renderPage() {
   const end = Math.min(start + PAGE_SIZE, total)
   const pageUsers = filteredUsers.slice(start, end)
 
+  document.getElementById('users-total-count').textContent = `(${total})`
   if (!total) {
-    document.getElementById('users-total-count').textContent = `(${users.length})`
     tbody.innerHTML = '<tr><td colspan="6"><div class="empty">No users yet</div></td></tr>'
     document.getElementById('pagination-info').textContent = ''
     document.getElementById('page-numbers').innerHTML = ''
