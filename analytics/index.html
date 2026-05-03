@@ -376,7 +376,7 @@
     <div class="tab-panel" id="tab-users">
       <div class="card">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <div class="card-title" style="margin-bottom:0;">All users</div>
+          <div class="card-title" style="margin-bottom:0;">All users <span id="users-total-count" style="color:var(--text2);font-weight:400;font-size:11px;margin-left:6px;"></span></div>
           <input type="text" id="user-search" placeholder="Search by email or name..." style="background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 12px;color:var(--text);font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:260px;" oninput="filterUsers()" />
         </div>
         <div style="overflow-x:auto;">
@@ -711,6 +711,7 @@ function renderPage() {
   const pageUsers = filteredUsers.slice(start, end)
 
   if (!total) {
+    document.getElementById('users-total-count').textContent = `(${users.length})`
     tbody.innerHTML = '<tr><td colspan="6"><div class="empty">No users yet</div></td></tr>'
     document.getElementById('pagination-info').textContent = ''
     document.getElementById('page-numbers').innerHTML = ''
