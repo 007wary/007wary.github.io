@@ -774,7 +774,8 @@ function goToPage(page) {
 }
 
 function renderLiveUsers(users) {
-  const online = users.filter(u => u.is_online)
+  const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000)
+const online = users.filter(u => u.is_online && u.online_at && new Date(u.online_at) > fiveMinAgo)
   const el = document.getElementById('live-users-list')
   const countEl = document.getElementById('live-count')
   if (!el) return
